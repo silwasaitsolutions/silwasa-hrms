@@ -77,9 +77,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* <p className="text-xs text-slate-400 text-center mt-6">
-          Default admin: admin@hrms.com / Admin@123
-        </p> */}
       </div>
     </div>
   );
