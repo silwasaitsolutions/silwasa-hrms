@@ -125,3 +125,43 @@ The system was deliberately built so these are additive changes, not rewrites:
 - All inputs are validated with Zod at the middleware layer before reaching controllers.
 - Helmet, CORS (restricted to `CLIENT_URL`), and rate limiting (stricter on `/auth`) are enabled by default.
 - Change `JWT_ACCESS_SECRET` and `JWT_REFRESH_SECRET` in production — the `.env.example` placeholders are not secure.
+
+## Database import using code
+
+## Create a temporary file named - **import.js** inside your backend folder:
+
+<!--
+
+import fs from 'fs';
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+async function runImport() {
+  const connection = await mysql.createConnection({
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    ssl: { rejectUnauthorized: false },
+    multipleStatements: true
+  });
+
+  console.log('Connected to Aiven! Temporarily disabling primary key requirement...');
+
+  // Temporarily disable the strict primary key check for this session
+  await connection.query("SET SESSION sql_require_primary_key = OFF;");
+
+  console.log('Importing database...');
+  const sql = fs.readFileSync('C:\\Users\\Asus\\Downloads\\hrms_db.sql', 'utf8');
+
+  await connection.query(sql);
+  console.log('Database imported successfully!');
+  await connection.end();
+}
+
+runImport().catch(err => console.error('Import failed:', err)); -->
+
+- run **hrms\backend>node import.js**
