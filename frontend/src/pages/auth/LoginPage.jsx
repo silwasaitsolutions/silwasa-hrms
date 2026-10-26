@@ -36,12 +36,9 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
       <div className="w-full max-w-sm card p-8">
         <div className="flex flex-col items-center mb-6">
-          {/* Updated Logo Image */}
-          <img
-            src="./images/mindkraftlogo-new.webp"
-            alt="Mindkraft Logo"
-            className="h-28 w-auto object-contain mb-3"
-          />
+          <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center text-white font-bold text-xl mb-3">
+            H
+          </div>
           <h1 className="text-xl font-semibold text-slate-900">Sign in to HRMS</h1>
           <p className="text-sm text-slate-500 mt-1">Employee Management System</p>
         </div>
@@ -80,6 +77,9 @@ export default function LoginPage() {
           </button>
         </form>
 
+        <p className="text-xs text-slate-400 text-center mt-6">
+          Default admin: admin@hrms.com / Admin@123
+        </p>
       </div>
     </div>
   );

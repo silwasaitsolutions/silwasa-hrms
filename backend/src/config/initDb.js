@@ -30,6 +30,7 @@ async function main() {
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     multipleStatements: true,
+    charset: 'utf8mb4',
   });
 
   console.log('Running schema.sql ...');

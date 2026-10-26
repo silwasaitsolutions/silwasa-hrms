@@ -13,9 +13,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   dateStrings: true,
-  ssl: {
-    rejectUnauthorized: false // Required for Aiven's cloud SSL connection
-  }
+  charset: 'utf8mb4',
 });
 
 export default pool;

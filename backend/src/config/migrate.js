@@ -16,6 +16,7 @@ const connection = await mysql.createConnection({
   database: process.env.DB_NAME || 'hrms_db',
   multipleStatements: true,
   dateStrings: true,
+  charset: 'utf8mb4',
 });
 
 try {

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Users, Building2, Briefcase, CalendarCheck,
-  CalendarDays, PartyPopper, Wallet, FileBarChart, FolderOpen, MapPin, X,
+  CalendarDays, PartyPopper, Wallet, FileBarChart, FolderOpen, MapPin, FileSignature, X,
 } from 'lucide-react';
 import useAuth from '../../hooks/useAuth.js';
 
@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { to: '/departments', label: 'Departments', icon: Building2, adminOnly: true },
   { to: '/designations', label: 'Designations', icon: Briefcase, adminOnly: true },
   { to: '/offices', label: 'Offices', icon: MapPin, adminOnly: true },
+  { to: '/hr-documents', label: 'HR Documents', icon: FileSignature, adminOnly: true },
   { to: '/attendance', label: 'Attendance', icon: CalendarCheck, adminOnly: false },
   { to: '/leave', label: 'Leave', icon: CalendarDays, adminOnly: false },
   { to: '/holidays', label: 'Holidays', icon: PartyPopper, adminOnly: false },
@@ -32,13 +33,8 @@ export default function Sidebar({ open, onClose }) {
         className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform
           ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
-        <div className="h-16 flex items-center px-5 border-b border-slate-200">
-          <img
-            src="./images/mindkraftlogo-new.webp"
-            alt="Mindkraft Logo"
-            className="h-12 w-auto object-contain mb-3"
-          />
-          <span className="text-lg font-bold text-primary-700">MindKraft HRMS</span>
+        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-200">
+          <span className="text-lg font-bold text-primary-700">HRMS</span>
           <button className="lg:hidden text-slate-400" onClick={onClose}>
             <X size={20} />
           </button>
