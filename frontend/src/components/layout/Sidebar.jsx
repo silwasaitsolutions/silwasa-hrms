@@ -33,8 +33,14 @@ export default function Sidebar({ open, onClose }) {
         className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-slate-200 flex flex-col transition-transform
           ${open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
-        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-200">
-          <span className="text-lg font-bold text-primary-700">HRMS</span>
+        <div className="h-16 flex items-center px-5 border-b border-slate-200">
+          {/* Updated Logo Image */}
+          <img
+            src="/images/mindkraftlogo-new.webp"
+            alt="Mindkraft Logo"
+            className="h-10 w-auto object-contain mb-3"
+          />
+          <span className="text-lg font-bold text-primary-700">Mindkraft</span>
           <button className="lg:hidden text-slate-400" onClick={onClose}>
             <X size={20} />
           </button>
