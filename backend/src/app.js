@@ -1,5 +1,3 @@
-import net from 'node:net';
-
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -38,60 +36,6 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use('/api', apiLimiter);
-
-// TEMPORARY: protected Hostinger MySQL connectivity diagnostic
-app.get('/api/diagnostics/mysql-tcp', (req, res) => {
-  const expectedSecret = process.env.DIAGNOSTIC_SECRET;
-
-  if (!expectedSecret || req.get('x-diagnostic-secret') !== expectedSecret) {
-    return res.status(404).json({ success: false, message: 'Not found' });
-  }
-
-  const host = process.env.DB_HOST;
-  const port = Number(process.env.DB_PORT || 3306);
-
-  if (!host) {
-    return res.status(500).json({
-      success: false,
-      result: 'missing_db_host',
-    });
-  }
-
-  const started = Date.now();
-  const socket = net.createConnection({ host, port });
-  let finished = false;
-
-  const finish = (status, result, code) => {
-    if (finished) return;
-    finished = true;
-    socket.destroy();
-
-    const response = {
-      success: status === 200,
-      result,
-      elapsed_ms: Date.now() - started,
-    };
-
-    if (code) response.code = code;
-
-    res.status(status).json(response);
-  };
-
-  socket.setTimeout(8000);
-
-  socket.once('connect', () => {
-    finish(200, 'tcp_connected');
-  });
-
-  socket.once('timeout', () => {
-    finish(504, 'tcp_timeout');
-  });
-
-  socket.once('error', (error) => {
-    finish(502, 'tcp_error', error.code);
-  });
-});
-
 
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'HRMS API is running', timestamp: new Date().toISOString() });
